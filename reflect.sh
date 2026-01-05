@@ -205,7 +205,7 @@ generate_summary() {
         echo "REFLECTION SUMMARY"
         echo "Generated: $(date)"
         echo ""
-        echo "Repository: $(git remote get-url origin 2>/dev/null || echo 'Unknown')"
+        echo "Repository: $(git config --get remote.origin.url 2>/dev/null | sed 's/@.*:/@***:/g' || echo 'Unknown')"
         echo "Branch: $(git branch --show-current 2>/dev/null || echo 'Unknown')"
         echo "Commit: $(git rev-parse --short HEAD 2>/dev/null || echo 'Unknown')"
         echo ""

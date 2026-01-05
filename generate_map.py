@@ -98,7 +98,7 @@ class CodebaseMapper:
             Number of lines or None if file cannot be read
         """
         try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
                 return sum(1 for _ in f)
         except Exception:
             return None
@@ -124,7 +124,8 @@ class CodebaseMapper:
         }
         
         try:
-            entries = sorted(directory.iterdir(), key=lambda x: (not x.is_dir(), x.name))
+            entries = list(directory.iterdir())
+            entries.sort(key=lambda x: (not x.is_dir(), x.name))
         except PermissionError:
             result['error'] = 'Permission denied'
             return result

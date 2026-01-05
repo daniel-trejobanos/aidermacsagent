@@ -114,6 +114,8 @@ check_conventions() {
     local errors=0
     
     # Check for uncommitted secrets (basic check)
+    # Note: This is a simple pattern check. For production use, consider
+    # dedicated tools like gitleaks or truffleHog for more accurate detection
     if git grep -i "api[_-]key\|password\|secret" 2>/dev/null | grep -v "CONVENTIONS.md" | grep -q .; then
         log_error "Potential secrets found in code!"
         errors=$((errors + 1))
