@@ -1,0 +1,80 @@
+{
+  "project": {
+    "name": "AiderMacsAgent",
+    "description": "Aidermacs alternative to Claude Code using Copilot and Gemini",
+    "version": "0.1.0"
+  },
+  "goals": [
+    "Provide an autonomous coding agent system",
+    "Support multiple AI providers (Copilot, Gemini)",
+    "Enable iterative development workflows",
+    "Maintain code quality through conventions and checks"
+  ],
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Initialize project structure",
+      "description": "Set up the basic project structure with all necessary files",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "id": "TASK-002",
+      "title": "Implement autonomous loop",
+      "description": "Create the main autonomous execution loop (ralph.sh)",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "id": "TASK-003",
+      "title": "Create reflection system",
+      "description": "Implement pre-flight checks and planning (reflect.sh, REFLECT.md)",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "id": "TASK-004",
+      "title": "Generate codebase map",
+      "description": "Develop map generation for codebase understanding (generate_map.py)",
+      "status": "completed",
+      "priority": "medium"
+    },
+    {
+      "id": "TASK-005",
+      "title": "Document conventions",
+      "description": "Establish and document coding conventions (CONVENTIONS.md)",
+      "status": "completed",
+      "priority": "medium"
+    }
+  ],
+  "features": [
+    {
+      "name": "Autonomous Coding Loop",
+      "description": "Automated workflow for iterative code generation and refinement",
+      "components": ["ralph.sh", "reflect.sh"]
+    },
+    {
+      "name": "Code Mapping",
+      "description": "Generate comprehensive maps of the codebase structure",
+      "components": ["generate_map.py"]
+    },
+    {
+      "name": "Quality Assurance",
+      "description": "Enforce conventions and perform pre-flight checks",
+      "components": ["CONVENTIONS.md", "REFLECT.md"]
+    }
+  ],
+  "milestones": [
+    {
+      "name": "MVP Release",
+      "version": "0.1.0",
+      "target_date": "2026-Q1",
+      "deliverables": [
+        "Core autonomous loop functionality",
+        "Basic code mapping",
+        "Convention documentation",
+        "User documentation"
+      ]
+    }
+  ]
+}
