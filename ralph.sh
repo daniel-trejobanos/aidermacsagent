@@ -54,7 +54,6 @@ for ((i=1; i<=MAX_LOOPS; i++)); do
     # 3. RUN AIDER
     # We allow Aider to try and fix its own errors first.
     aider \
-        --model "$MODEL" \
         --read PRD.json \
         --read progress.txt \
         --test-cmd "$TEST_CMD" \
