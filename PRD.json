@@ -6,7 +6,6 @@
   },
   "goals": [
     "Provide an autonomous coding agent system",
-    "Support multiple AI providers (Copilot, Gemini)",
     "Enable iterative development workflows",
     "Maintain code quality through conventions and checks"
   ],
@@ -45,6 +44,14 @@
       "description": "Establish and document coding conventions (CONVENTIONS.md)",
       "status": "completed",
       "priority": "medium"
+    },
+    {
+        "id": "TASK-006",
+        "title": "initialize UV dependency management",
+        "description": "Set up UV for managing dependencies and environment",
+        "status": "todo",
+        "priority": "low"
+          
     }
   ],
   "features": [

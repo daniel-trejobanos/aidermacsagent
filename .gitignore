@@ -32,3 +32,4 @@ Thumbs.db
 
 # Output files
 codebase_map.json
+.aider*
