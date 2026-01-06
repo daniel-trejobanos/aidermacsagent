@@ -361,7 +361,7 @@ Ensure all required environment variables are set or have defaults in the script
 
 ## License
 
-[Specify your license here]
+MIT License
 
 ## Support
 
