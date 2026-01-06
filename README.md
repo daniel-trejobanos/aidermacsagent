@@ -9,7 +9,7 @@ AiderMacsAgent is a framework for autonomous software development that leverages
 ## Features
 
 - **Autonomous Coding Loop**: Automated workflow for iterative code generation and refinement
-- **Multi-AI Support**: Integrates with GitHub Copilot and Google Gemini
+- **Multi-AI Support**: Integrates with GitHub Copilot and Google Gemini via Aider
 - **Code Mapping**: Generates comprehensive maps of codebase structure
 - **Pre-Flight Checks**: Ensures quality and adherence to conventions before changes
 - **Convention Enforcement**: Maintains code quality through documented standards
@@ -23,9 +23,11 @@ aidermacsagent/
 ├── CONVENTIONS.md     # Coding Standards & Rules
 ├── REFLECT.md         # Pre-Flight Checklist
 ├── README.md          # This file
+├── MAP.md             # Codebase Map visualization
 ├── generate_map.py    # Codebase Map Generator
 ├── ralph.sh           # Autonomous Loop Script
 ├── reflect.sh         # Planning & Reflection Script
+├── progress.txt       # Autonomous loop progress log
 └── logs/              # Generated logs and outputs
 ```
 
@@ -37,6 +39,7 @@ aidermacsagent/
   - Bash (4.0+)
   - Python 3.8+
   - Git
+  - **Aider**: The core AI coding assistant tool
 
 - **Optional** (but recommended):
   - `jq` - JSON parsing in shell scripts
@@ -56,7 +59,12 @@ cd aidermacsagent
 chmod +x ralph.sh reflect.sh generate_map.py
 ```
 
-3. Install optional dependencies (Ubuntu/Debian):
+3. Install Aider (Required):
+```bash
+pip install aider-chat
+```
+
+4. Install optional dependencies (Ubuntu/Debian):
 ```bash
 sudo apt-get install jq shellcheck python3-pip
 pip3 install pylint
@@ -90,14 +98,10 @@ This will:
 Create a comprehensive map of your codebase:
 
 ```bash
-./generate_map.py --pretty --output codebase_map.json
+./generate_map.py
 ```
 
-Options:
-- `--pretty`: Format JSON with indentation
-- `--output FILE`: Write to file instead of stdout
-- `--max-depth N`: Limit directory traversal depth
-- `--summary-only`: Show only statistics, not full structure
+The map will be saved to `MAP.md`.
 
 #### 3. Run Autonomous Loop
 
@@ -117,7 +121,7 @@ This will:
 
 You can customize the loop with environment variables:
 ```bash
-MAX_ITERATIONS=20 SLEEP_BETWEEN_ITERATIONS=10 ./ralph.sh
+MAX_LOOPS=5 ./ralph.sh
 ```
 
 ## Core Components
@@ -219,9 +223,8 @@ The typical autonomous workflow follows these steps:
 
 ### Environment Variables
 
-- `MAX_ITERATIONS`: Maximum number of autonomous loop iterations (default: 10)
-- `SLEEP_BETWEEN_ITERATIONS`: Seconds to wait between iterations (default: 5)
-- `LOG_DIR`: Directory for logs (default: ./logs)
+- `MAX_LOOPS`: Maximum number of autonomous loop iterations (default: 2)
+- `TEST_CMD`: Command to run tests (default: "pytest")
 
 ### Customization
 
@@ -238,28 +241,18 @@ Edit `CONVENTIONS.md` to:
 
 ## AI Integration
 
-AiderMacsAgent is designed to work with various AI coding assistants:
+AiderMacsAgent is designed to work with various AI coding assistants via Aider:
 
-### GitHub Copilot
+### Configuration
 
-To integrate GitHub Copilot:
-1. Install GitHub Copilot CLI or API access
-2. Update `ralph.sh` `execute_task()` function
-3. Add authentication credentials (via environment variables, never commit!)
+Ensure you have your API keys set up for Aider:
 
-### Google Gemini
-
-To integrate Google Gemini:
-1. Obtain API key from Google AI Studio
-2. Update `ralph.sh` `execute_task()` function
-3. Add authentication (via environment variables)
-
-### Other AI Assistants
-
-The framework is extensible. To add new AI providers:
-1. Implement API client in `execute_task()`
-2. Follow conventions in `CONVENTIONS.md`
-3. Test integration thoroughly
+```bash
+export OPENAI_API_KEY=sk-...
+# or
+export ANTHROPIC_API_KEY=sk-...
+# or other supported providers
+```
 
 ## Development
 
@@ -267,13 +260,13 @@ The framework is extensible. To add new AI providers:
 
 ```bash
 # Test the map generator
-./generate_map.py --summary-only .
+./generate_map.py
 
 # Test reflection script
 ./reflect.sh
 
 # Test autonomous loop (dry run)
-MAX_ITERATIONS=1 ./ralph.sh
+MAX_LOOPS=1 ./ralph.sh
 ```
 
 ### Linting
@@ -284,9 +277,6 @@ pylint generate_map.py
 
 # Lint shell scripts
 shellcheck ralph.sh reflect.sh
-
-# Format Python code
-black generate_map.py
 ```
 
 ### Adding New Tasks
@@ -307,40 +297,6 @@ black generate_map.py
 6. **Document as you go**: Update docs alongside code
 7. **Commit often**: Small, focused commits are better
 
-## Troubleshooting
-
-### "Permission denied" when running scripts
-
-```bash
-chmod +x ralph.sh reflect.sh generate_map.py
-```
-
-### "Python not found"
-
-Install Python 3.8+:
-```bash
-# Ubuntu/Debian
-sudo apt-get install python3
-
-# macOS
-brew install python3
-```
-
-### "jq: command not found"
-
-Install jq for JSON parsing:
-```bash
-# Ubuntu/Debian
-sudo apt-get install jq
-
-# macOS
-brew install jq
-```
-
-### Scripts fail with "set -u: unbound variable"
-
-Ensure all required environment variables are set or have defaults in the script.
-
 ## Contributing
 
 1. Read `CONVENTIONS.md` thoroughly
@@ -350,14 +306,6 @@ Ensure all required environment variables are set or have defaults in the script
 5. Add/update tests as needed
 6. Update documentation
 7. Submit pull request
-
-## Security
-
-- **Never commit secrets**: Use environment variables or secret management
-- **Validate input**: Sanitize all external input
-- **Review dependencies**: Check for vulnerabilities
-- **Audit AI-generated code**: Always review before committing
-- **Follow principle of least privilege**: Limit access appropriately
 
 ## License
 
@@ -369,28 +317,7 @@ For issues, questions, or contributions:
 - GitHub Issues: https://github.com/daniel-trejobanos/aidermacsagent/issues
 - Documentation: This README and files in the repository
 
-## Acknowledgments
-
-Inspired by:
-- Aider - AI pair programming in your terminal
-- Claude Code - Anthropic's coding assistant
-- GitHub Copilot - AI pair programmer
-- Google Gemini - Multi-modal AI model
-
-## Roadmap
-
-See `PRD.json` for current tasks and milestones.
-
-Future enhancements:
-- Web UI for monitoring
-- Integration with more AI providers
-- Advanced code analysis
-- Team collaboration features
-- CI/CD pipeline integration
-- Metrics and analytics dashboard
-
 ---
 
-**Version**: 0.1.0  
-**Last Updated**: 2026-01-05  
+**Version**: 0.1.0
 **Status**: Active Development
