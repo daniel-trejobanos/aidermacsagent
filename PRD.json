@@ -48,7 +48,7 @@
     {
       "id": "TASK-006",
       "title": "Documentation",
-      "description": "Create or update user documentation and usage guidelines",
+      "description": "Create or update user documentation and usage guidelines (README.md) do not change any other file",
       "status": "pending",
       "priority": "low"
     }

@@ -78,17 +78,23 @@ for ((i=1; i<=MAX_LOOPS; i++)); do
         fi
         
     else
-        echo "🚨 FAILURE: Tests failed after agent attempt."
-        echo "Create rollback..."
+        # check if no tests are ran, then do not consider it a failure
+        if [ $TEST_EXIT_CODE -eq 5 ]; then
+            echo "⚠️  Warning: No tests were run. Assuming no changes were made."
+            continue
+        else
+            echo "🚨 FAILURE: Tests failed after agent attempt."
+            echo "Create rollback..."
         
-        # --- THE ROLLBACK ---
-        git reset --hard "$START_COMMIT"
-        git clean -fd  # Remove any untracked files Aider created
+            # --- THE ROLLBACK ---
+            git reset --hard "$START_COMMIT"
+            git clean -fd  # Remove any untracked files Aider created
         
-        echo "🔙 Rolled back to ${START_COMMIT:0:7}."
+            echo "🔙 Rolled back to ${START_COMMIT:0:7}."
         
-        # Log the failure so the next loop doesn't try the exact same strategy blindly
-        echo "⚠️  Loop $i FAILED. Rolled back changes. Agent failed to satisfy tests." >> progress.txt
+            # Log the failure so the next loop doesn't try the exact same strategy blindly
+            echo "⚠️  Loop $i FAILED. Rolled back changes. Agent failed to satisfy tests." >> progress.txt
+        fi
     fi
 
     echo "💤 Ralph is sleeping for 5 seconds..."
