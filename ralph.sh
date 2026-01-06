@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # --- CONFIGURATION ---
-MAX_LOOPS=10
-MODEL="gemini/gemini-1.5-pro"
+MAX_LOOPS=2
 TEST_CMD="pytest"  # Adjust for your project (npm test, cargo test, etc.)
 # ---------------------
 

@@ -3,7 +3,7 @@
 echo "🤔 Reflector is thinking..."
 
 # 1. Update the Map first to ensure it's fresh
-./generate_map  # Assumes you have the script from the previous step
+python ./generate_map.py  # Assumes you have the script from the previous step
 
 # 2. Run Aider in "Ask" mode (Read-Only)
 # --read-only: Prevents any code edits.

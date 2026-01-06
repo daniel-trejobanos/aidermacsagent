@@ -34,25 +34,25 @@
     {
       "id": "TASK-004",
       "title": "Generate codebase map",
-      "description": "Develop map generation for codebase understanding (generate_map.py)",
+      "description": "Develop a script for  map generation for codebase understanding (generate_map.py)",
       "status": "completed",
       "priority": "medium"
     },
     {
       "id": "TASK-005",
-      "title": "Document conventions",
-      "description": "Establish and document coding conventions (CONVENTIONS.md)",
+      "title": "Coding agent conventions and behaviour",
+      "description": "Establish and document coding conventions and behaviour guidelines for  the ai agent to follow (CONVENTIONS.md)",
       "status": "completed",
       "priority": "medium"
     },
     {
-        "id": "TASK-006",
-        "title": "initialize UV dependency management",
-        "description": "Set up UV for managing dependencies and environment",
-        "status": "todo",
-        "priority": "low"
-          
+      "id": "TASK-006",
+      "title": "Documentation",
+      "description": "Create or update user documentation and usage guidelines",
+      "status": "pending",
+      "priority": "low"
     }
+          
   ],
   "features": [
     {
